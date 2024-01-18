@@ -4,17 +4,19 @@ body {
 }
 
 .container-login {
-  display: grid;
-  max-width: 30%;
+  border: 1px solid;
+  display: flex;
+  max-width: 70%;
   padding: 20px;
-  margin-top: 2rem;
+  margin: 6rem auto 0 auto;
   border-radius: 5px;
-  justify-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
+
 h2.h2-title {
     text-align: center;
 }
-.container-body {
-  display: grid;
-  justify-items: center;
+.container-form{
+  margin-right: 3rem;
 }
