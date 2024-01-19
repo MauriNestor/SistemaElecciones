@@ -1,0 +1,17 @@
+body {
+    font-family: system-ui;
+    background-color: #f8f9fa;
+  }
+.container-data {
+    display: grid;
+    margin-top: 3rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+.container-img-logo {
+    place-self: center;
+}
+.list-group-flush {
+    border-radius: 0;
+    font-weight: 500;
+}

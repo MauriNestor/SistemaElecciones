@@ -1,0 +1,22 @@
+body {
+  font-family: system-ui;
+  background-color: #f8f9fa;
+}
+
+.container-login {
+  border: 1px solid;
+  display: flex;
+  max-width: 70%;
+  padding: 20px;
+  margin: 6rem auto 0 auto;
+  border-radius: 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h2.h2-title {
+    text-align: center;
+}
+.container-form{
+  margin-right: 3rem;
+}
