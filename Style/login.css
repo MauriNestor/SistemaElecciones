@@ -1,55 +1,9 @@
-
-.container-login {
-  border: 1px solid;
-  display: flex;
-  max-width: 70%;
-  padding: 20px;
-  margin: 6rem auto 0 auto;
-  border-radius: 5px;
-  justify-content:space-between;
-  align-items: center;
-  background-color: #ddedf0;
-  box-shadow: 0 0 20px rgba(166, 139, 139, 0.854);  
-
+body{
+    background: #ffe259;
+    background: linear-gradient(to right, #843dff, #ebe5ff);
 }
-.nav-link{
-  border-radius: 20px;
-  color:yellow;
-}
-
-h2.h2-title {
-    text-align: center;
-}
-.container-form{
-  margin-right: 3rem;
-}
-header{
-  
-  text-align:center;
-  color: black;
-  font-style: italic;
-  position: absolute;
-  top: 40px;
-  right:20px;
-  left: 20px;
-}
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.container-body{
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@keyframes wipe-in-left {
-  from {
-    clip-path: inset(0 0 0 100%);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-[transition-style="in:wipe:left"] {
-  animation: 2.5s cubic-bezier(.25, 1, .30, 1) wipe-in-left both;
+.bg{
+    background-image:url(../assets/icon/elecciones-Judiciales-Bolivia-2024.jpg);
+    background-position: center center;
+    height: 455px;
 }

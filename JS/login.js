@@ -1,4 +1,4 @@
-function loguearUs() {
+function loginUs() {
     var carnetInput = document.getElementById('input-carnet').value;
     var fechaNacimientoInput = document.getElementById('input-fn').value;
     
@@ -21,6 +21,8 @@ function loguearUs() {
 
         if (carnetInput === credencialesAlmacenadas.carnet && fechaNacimientoInput === credencialesAlmacenadas.fechaNacimiento) {
             window.location ="/../perfil.html";
+            document.getElementById('input-fn').value = '';
+
         } else {
             alert('CI y/o incorrecta, por favor vuelve a iniciar los datos');
             document.getElementById('input-carnet').value = '';
@@ -28,7 +30,7 @@ function loguearUs() {
         }
     }    
 }
-function loguearCorte(){
+function loginComite(){
 
     let ci = document.getElementById("input-ci").value;
     let pass = document.getElementById("input-contra").value;
@@ -42,7 +44,7 @@ function loguearCorte(){
     }else{
 
         if(ci ==credencialesAlmacenadas.carnet && pass==credencialesAlmacenadas.contraseña){
-            window.location ="/../corteElectoral.html";
+            window.location ="/../verResultados.html";
         }else{
             alert("Verifique que su usuario y contraseña sean los correctos");
             document.getElementById('input-ci').value = '';
@@ -50,7 +52,7 @@ function loguearCorte(){
         }
     }
 }
-function loguearAdmin(){
+function loginAdmin(){
 
     let us = document.getElementById("input-usuario").value;
     let pass = document.getElementById("input-contraseña").value;
@@ -64,6 +66,8 @@ function loguearAdmin(){
         alert('Inicio de sesión exitoso');
     }else{
         alert("Datos incorrectos");
+        document.getElementById('input-usuario').value = '';
+        document.getElementById('input-contraseña').value = '';
     }
 
 }
