@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>corte electoral</title>
+    <title>Estadísticas de votación</title>
+    <link rel="stylesheet" href="/Style/corteElectoral.css">
+    <script src="./JS/corteElectoral.js"></script>
+
 </head>
 <body>
-    <h1>
-        ESTO ES LA PAGINA DE LA CORTE ELECTORAL, DONDE SE VERAN LOS RESULTADOS
-    </h1>
+    <div class="candidate">
+        <div class="candidate-name">Candidato1</div>
+        <div class="candidate-party">UTP</div>
+        <div class="candidate-percentage">30%</div>
+    </div>
+
+    <div class="candidate">
+        <div class="candidate-name">Candidato2</div>
+        <div class="candidate-party">UDD</div>
+        <div class="candidate-percentage">23%</div>
+    </div>
+
+    <div class="candidate">
+        <div class="candidate-name">Candidato3</div>
+        <div class="candidate-party">OPS</div>
+        <div class="candidate-percentage">30%</div>
+    </div>
+
+    <button class="exit-button" type="button" onclick="salir()">Salir</button>
 </body>
 </html>
