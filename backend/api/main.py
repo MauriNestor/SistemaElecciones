@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+app=FastAPI()
 
-@app.get("/")
-
-async def root():
-    return "Hola Mundo"
+@app.get('/')
+async def index():
+    return{}
