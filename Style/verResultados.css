@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    background: #fefefe;
+}
+.titulo{
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 10px;
+    /* padding: 40px 30px 20px 0px; */
+}
+.container{
+    display: grid;
+    padding: 10px;
+    background: lightsalmon;
+    border-radius: 10px;
+    grid-template-columns: 1fr 1fr 1fr ;
+    gap: 5px;    
+ 
+}
+.box-candidato{
+    background-color: lightblue;
+    border: 4px solid green;
+    text-align: center;
+}
+
+.box-candidato .card-img{
+    width: 150px;
+}
+
