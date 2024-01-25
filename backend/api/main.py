@@ -4,18 +4,14 @@ from typing import Annotated
 import models
 from db import engine, SessionLocal
 from sqlalchemy.orm import Session
+import auth
+from auth import get_current_user
 
 app=FastAPI()
+app.include_router(auth.router)
 
 models.Base.metadata.create_all(bind=engine)
 
-class getElector(BaseModel):
-    ci: str
-    nombre: str
-    ap_p: str
-    ap_m: str
-    f_nac: str
-    estado: str
 
 def get_db():
     db = SessionLocal()
@@ -25,8 +21,9 @@ def get_db():
         db.close()
 
 db_dependency = Annotated[Session, Depends(get_db)]
+user_dependency = Annotated[dict,Depends(get_current_user)]
 
-@app.get("/login/", status_code = status.HTTP_200_OK)
+@app.get("/readElector/", status_code = status.HTTP_200_OK)
 async def read_elector( ci: str, f_nac: str, db: db_dependency):
     elector = db.query(models.elector).filter(models.elector.ci_elector == ci, models.elector.fecha_nacimiento == f_nac).first()
     if elector is None:
@@ -46,3 +43,9 @@ async def read_comite( ci: str, password: str, db: db_dependency):
     if comite is None:
         raise HTTPException(status_code=404, detail = 'usuario de comite electoral no encontrado')
     return comite
+
+@app.get("/login",status_code=status.HTTP_200_OK)
+async def elec(ci: user_dependency, db: db_dependency):
+    if elec is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail='autenticacion fallida')
+    return {'elector':elec}
