@@ -2,7 +2,6 @@ body {
     background: #ffe259;
     background: linear-gradient(to right, #843dff, #ebe5ff);
 }
-
 .container-data {
     display: grid;
     margin-top: 3rem;
