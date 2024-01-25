@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-URL_DATABASE = 'mysql+pymysql://rots100:password123456789*@rots100.mysql.pythonanywhere-services.com/rots100$default'
+URL_DATABASE = 'mysql+pymysql://root:@localhost:3306/elecciones'
 
 engine = create_engine(URL_DATABASE)
 

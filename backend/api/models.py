@@ -11,4 +11,18 @@ class elector(Base):
     fecha_nacimiento = Column(Date)
     estado = Column(String(255))
 
+class administrador(Base):
+    __tablename__='administrador'
+
+    id_admin = Column(Integer,primary_key=True, index=True)
+    username = Column(String(255))
+    contrasena = Column(String(255))
+
+class comite_electoral(Base):
+    __tablename__= 'comite_electoral'
+
+    id_comite = Column(Integer,primary_key=True,index=True)
+    ci_Comite = Column(String(10))
+    contrasena = Column(String(25))
+
     
