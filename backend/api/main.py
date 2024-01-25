@@ -45,7 +45,7 @@ async def read_comite( ci: str, password: str, db: db_dependency):
     return comite
 
 @app.get("/login",status_code=status.HTTP_200_OK)
-async def elec(ci: user_dependency, db: db_dependency):
-    if elec is None:
+async def user(user: user_dependency, db: db_dependency):
+    if user is None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail='autenticacion fallida')
-    return {'elector':elec}
+    return {'elector':user}
