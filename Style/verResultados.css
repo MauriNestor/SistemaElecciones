@@ -6,29 +6,64 @@
 }
 body{
     background: #fefefe;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    gap:10px ;
 }
 .titulo{
     text-align: center;
-    padding-top: 40px;
-    padding-bottom: 10px;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
     /* padding: 40px 30px 20px 0px; */
 }
 .container{
     display: grid;
-    padding: 10px;
+    width: 90%;
+    height: auto;
+    padding: 20px;
     background: lightsalmon;
     border-radius: 10px;
-    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 5px;    
  
 }
 .box-candidato{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0px 0px 4px 1px #DADADA;
+    border-radius: 20px;
     background-color: lightblue;
-    border: 4px solid green;
+    /* border: 4px solid green; */
     text-align: center;
+    row-gap: 20px;
+    padding-top: 20px;
 }
 
 .box-candidato .card-img{
-    width: 150px;
+    width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
 }
+.box-candidato, h2 .box-candidato p{
+    padding: 0px 10px 5px 10px;
+    font-size: 15px;
+}
+.btn-opciones{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 
+}
+.btn-opciones .btn{
+
+    border-radius: 6px;
+    padding: 10px;
+}
+.btn-opciones .salir{
+    background-color: #e3d8f5;
+}
+.btn-opciones .imprimir{
+    background-color: #b8a3dd;
+}
