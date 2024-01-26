@@ -9,26 +9,11 @@ function loginUs() {
         return; // Detener la ejecución si la fecha no es válida
     }
 
-    var credencialesAlmacenadas = {
-        carnet: '9344284',
-        fechaNacimiento: '2003-09-20' 
-    };
-
     if (carnetInput === '' || fechaNacimientoInput === '') {
         alert("Por favor, complete ambos campos.");
         return; 
-    }else{
-
-        if (carnetInput === credencialesAlmacenadas.carnet && fechaNacimientoInput === credencialesAlmacenadas.fechaNacimiento) {
-            window.location ="/../perfil.html";
-            document.getElementById('input-fn').value = '';
-
-        } else {
-            alert('CI y/o incorrecta, por favor vuelve a iniciar los datos');
-            document.getElementById('input-carnet').value = '';
-            document.getElementById('input-fn').value = '';
-        }
-    }    
+    }
+    loginElector(carnetInput,fechaNacimientoInput);
 }
 function loginComite(){
 
@@ -70,4 +55,27 @@ function loginAdmin(){
         document.getElementById('input-contraseña').value = '';
     }
 
+}
+
+async function loginElector(c_i,fec_n){
+    const url = `http://127.0.0.1:8000/auth/token?ci=${c_i}&fecha_nac=${fec_n}`; //esto es el link del api local
+    try{
+        const response = await fetch(url, {
+            method: 'POST',
+            mode: 'cors', // Importante: Habilitar CORS
+        });
+        
+        if (response.ok){
+            const data = await response.json();
+            console.log('OK', data.access_token);
+            localStorage.setItem('access_token',data.access_token);
+            window.location.href = "http://127.0.0.1:5500/perfil.html";
+        }
+        else{
+            console.log('error al autenticar', response.status, response.statusText);
+        }
+    }
+    catch (error){
+        console.error('error en red',error);
+    }
 }

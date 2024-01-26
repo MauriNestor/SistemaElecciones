@@ -4,11 +4,20 @@ from typing import Annotated
 import models
 from db import engine, SessionLocal
 from sqlalchemy.orm import Session
-import auth
+from auth import router as auth_router
 from auth import get_current_user
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app=FastAPI()
-app.include_router(auth.router)
+app.include_router(auth_router)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5500"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -45,7 +54,7 @@ async def read_comite( ci: str, password: str, db: db_dependency):
     return comite
 
 @app.get("/login",status_code=status.HTTP_200_OK)
-async def user(user: user_dependency, db: db_dependency):
-    if user is None:
+async def elec(elec: user_dependency, db: db_dependency):
+    if elec is None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail='autenticacion fallida')
-    return {'elector':user}
+    return {'elector':elec}

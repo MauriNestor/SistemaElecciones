@@ -39,36 +39,39 @@ def get_db():
 db_dependency = Annotated[Session, Depends(get_db)]
 
 
-@router.post("/login", response_model=Token)
-async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,Depends()], db: db_dependency):
-    elec = authenticate_elector(form_data.username,form_data.password,db)
+@router.post("/token", response_model=Token)
+async def login_for_access_token(ci: str , fecha_nac: str , db: db_dependency):
+    elec = authenticate_elector(ci, fecha_nac, db)
     if not elec:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail='no es un elector valido')
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='no es un elector valido')
     token = create_access_token(elec.nombre, elec.ci_elector, timedelta(minutes=5))
 
-    return {'access_token':token, 'token_type': 'bearer'}
+    return {'access_token': token, 'token_type': 'bearer'}
 
 
 def authenticate_elector(username: str, password: str, db):
-    elec = db.query(elector).filter(elector.ci_elector == username, elector.fecha_nacimiento == password).first()
+    elec = db.query(elector).filter(elector.ci_elector == username).first()
+    pass_elec = elec.fecha_nacimiento.strftime('%Y-%m-%d')
+    hashed_pass = bcrypt_context.hash(pass_elec) 
     if not elec:
+        return False
+    if not bcrypt_context.verify(password, hashed_pass):
         return False
     return elec
 
 def create_access_token(username: str, userid: str, expires_delta: timedelta):
-    encode = {'sub':username,'id':userid}
+    encode = {'nombre':username,'ci_elector':userid}
     expires = datetime.utcnow()+ expires_delta
     encode.update({'exp':expires})
     return jwt.encode(encode, SECRET_KEY, algorithm=ALGORITHM)
 
-def get_current_user(token: Annotated[str,Depends(oauth2_bearer)]):
+def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
     try:
         payload = jwt.decode(token,SECRET_KEY,algorithms=[ALGORITHM])
-        nombre: str = payload.get('sub')
-        ci_elector: str = payload.get('id')
+        nombre: str = payload.get('nombre')
+        ci_elector: str = payload.get('ci_elector')
         if nombre is None or ci_elector is None:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail='Could not validate user')
         return {'nombre': nombre,'ci':ci_elector}
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='could not validated user')
-        
