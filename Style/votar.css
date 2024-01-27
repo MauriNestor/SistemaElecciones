@@ -11,17 +11,25 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #EFEFEF;
+    background-color: #ebe5ff;
     
 }
+h1{
+    font-size: 50px;
+    text-align: center;
+    padding-bottom:10px;
+}
+span{
+    font-size: 30px;
+}
 .slide-container{
-    max-width: 1120px;
+    max-width: 1500px;
+    height: 700px;
     width: 100%;
-    /* background-color: grey; */
     padding: 40px 0;
 }
 .slide-content{
-    /* padding: 45px 20px; */
+    padding: 45px 20px;
     margin: 0 40px;
     /* background-color: red; */
     overflow: hidden;
@@ -29,6 +37,7 @@ body{
 }
 .card{
     width: 320px;
+    height: 450px;
     border-radius: 25px;
     background-color: #FFF;
 
@@ -38,7 +47,8 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px 14px;
+    padding: 30px 10px 10px 0px;
+
 }
 .image-content{
     row-gap: 5px;
@@ -70,8 +80,8 @@ body{
 }
 .card-image{
     position: relative;
-    height: 150px;
-    width: 159px;
+    height: 200px;
+    width:200px;
     background-color: #FFF;
     border-radius: 50%;
     padding: 3px;
@@ -96,7 +106,7 @@ body{
 }
 .button{
     border: none;
-    font-size: 16px;
+    font-size: 25px;
     color: #fff;
     padding: 8px 16px;
     background-color: #843dff;
