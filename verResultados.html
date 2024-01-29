@@ -16,53 +16,18 @@
     </header>
     <div class="container">
         <div class="box-candidato">
-            <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
-            <h2>JEANYNE ANIEZ </h2>
-            <P>CDS/ASD<br>
-                   1%<br>
-                   10 votos<br>
-            </P>
+
+            {% for candidato in candidatos %}
+                <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
+                <h2>{{ candidato.get_nombre() }} </h2>
+                <P>{{ candidato.partido }}<br>
+                    1%<br>
+                    Votos: {{resultados[loop.index0]}}<br>
+                </P>
+            {% endfor %}
+
         </div>
-        <div class="box-candidato">
-            <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
-            <h2>JEANYNE ANIEZ </h2>
-            <P>CDS/ASD<br>
-                   1%<br>
-                   10 votos<br>
-            </P>
-        </div>
-        <div class="box-candidato">
-            <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
-            <h2>JEANYNE ANIEZ </h2>
-            <P>CDS/ASD<br>
-                   1%<br>
-                   10 votos<br>
-            </P>
-        </div>
-        <div class="box-candidato">
-            <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
-            <h2>JEANYNE ANIEZ </h2>
-            <P>CDS/ASD<br>
-                   1%<br>
-                   10 votos<br>
-            </P>
-        </div>
-        <div class="box-candidato">
-            <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
-            <h2>JEANYNE ANIEZ </h2>
-            <P>CDS/ASD<br>
-                   1%<br>
-                   10 votos<br>
-            </P>
-        </div>
-        <div class="box-candidato">
-            <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
-            <h2>JEANYNE ANIEZ </h2>
-            <P>CDS/ASD<br>
-                   1%<br>
-                   10 votos<br>
-            </P>
-        </div>
+        
     </div>
     <div class="btn-opciones">
         <a href="/loginUsuario.html" class="btn imprimir">
