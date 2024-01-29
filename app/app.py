@@ -47,6 +47,16 @@ class Elector(Persona):
     def habilitado(self, habilitado):
         self.__habilitado = habilitado
 
+class comite_electoral(Persona):
+    def __init__(self, nombre, ci, contrasena):
+        super().__init__(nombre, ci)
+        self.__contrasena = contrasena
+        self.__ci = ci
+
+    @property
+    def get_contrasena(self):
+        return self.__contrasena
+
 class Voto:
     def __init__(self, elector, voto):
         self.__elector = elector
@@ -71,7 +81,12 @@ elector1 = Elector('Mauricio Apaza',9344284, True,'2003-09-20')
 elector2 = Elector('miguel pérez',23, True, '2004-10-10')
 elector3 = Elector('luis cuadros',24, True,'2005-01-21' )
 
+
+comite1 = comite_electoral('jose', 123456, 'password')
+comite2 = comite_electoral('pablo', 123457, 'password')
+
 electores=[elector1, elector2, elector3]   # lista de electores
+comites=[comite1,comite2] # Lista de comite
 
 votos =[]  # lista de votos
 
@@ -83,9 +98,9 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
-@app.route('/')
-def index():
-    return render_template('loginUsuario.html')
+    @app.route('/')
+    def index():
+        return render_template('loginUsuario.html')
 
 @app.route('/verificar', methods=['POST'])
 def verificar():
@@ -117,3 +132,33 @@ def verificar():
 
     return render_template('loginUsuario.html')
 
+    @app.route('/comite')
+    def index():
+        return render_template('loginComite.html')
+    
+@app.route('/verificar_comite', methods=['POST'])
+def verificar_comite():
+    id_comite = request.form['input-ci']
+    pass_comite = request.form('input-contra')
+
+    registrado = False
+
+    if not id_comite or not pass_comite:
+        flash('Por favor, complete ambos campos.', 'error')
+        return render_template('loginComite.html')
+    
+    indice_elector = -1
+
+    for comite in comites:
+        ci = str(comite.get_ci)
+        contra = str(comite.get_contrasena)
+
+        if ci == id_comite and contra == pass_comite:
+            registrado = True
+            return render_template('verResultados.html')
+    
+    if not registrado:
+        flash('CI y/o Contraseña incorrecta, por favor vuelve a ingresar los datos.', 'error')
+
+    return render_template('loginComite.html')
+        
