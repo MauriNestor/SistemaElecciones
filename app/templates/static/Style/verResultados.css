@@ -1,0 +1,77 @@
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-color: #6d326d; /* Morado más oscuro */
+    color: rgba(255, 255, 255, 0.85); /* Texto transparente */
+    margin: 0;
+    padding: 0;
+}
+
+.candidate {
+    display: inline-block;
+    background-color: #c1bbc4; /* Morado oscuro */
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; /* Agregamos una transición suave al efecto de transformación */
+}
+
+.candidate:hover {
+    transform: scale(1.60); /* Hacemos que el cuadro se agrande un 5% al pasar el ratón */
+}
+
+
+.candidate {
+    display: inline-block;
+    background-color: #c1bbc4; /* Morado oscuro */
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.candidate-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.candidate-party {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.candidate-percentage {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.exit-button,
+#capturar {
+    padding: 20px 30px; /* Aumenta el padding para hacer los botones más grandes */
+    font-size: 20px; /* Aumenta el tamaño del texto */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.exit-button {
+    background-color: #e21212; /* Morado oscuro */
+}
+
+.exit-button:hover {
+    background-color: #fffcff; /* Morado oscuro más oscuro al pasar el ratón */
+}
+
+#capturar {
+    background-color: #4CAF50; /* Color verde para el botón de "Capturar y Guardar" */
+    color: white;
+}
+
+#capturar:hover {
+    background-color: #45a049; /* Verde más oscuro al pasar el ratón */
+}

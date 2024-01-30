@@ -24,7 +24,7 @@ class Candidato(Persona):
         self.__image_path = partido + '.jpg'
 
     @property
-    def partido(self):
+    def get_partido(self):
         return self.__partido
 
     @property
@@ -61,10 +61,11 @@ class comite_electoral(Persona):
 class Voto:
     def __init__(self,candidato:Candidato):
         self.__candidato = candidato
-    
+
     @property
     def get_candidato(self):
         return self.__candidato
+    
 
     def emitir_voto(self):
         if self.__elector.habilitado:
@@ -90,12 +91,13 @@ voto2 = Voto(candidato1)
 voto3 = Voto(candidato2)
 voto4 = Voto(candidato3)
 voto5 = Voto(candidato1)
+voto6 = Voto(candidato2)
 electores=[elector1, elector2, elector3]   # lista de electores
 comites=[comite1,comite2] # Lista de comite
 
-votos =[voto1,voto2,voto3,voto4,voto5]  # lista de votos
+votos =[voto1,voto2,voto3,voto4,voto5, voto6]  # lista de votos
 
-app = Flask(__name__, static_url_path='/templates/Style/login.css')
+app = Flask(__name__, static_url_path='/templates/static/Style')
 app.secret_key = 'cochabamba'
 
 class LoginForm(FlaskForm):
@@ -170,18 +172,16 @@ def verificar_comite():
 
 @app.route('/ver_resultado', methods=['GET'])
 def ver_res():
+    resultados = calcular_resultados()
+    return render_template('verResultados.html',resultados=resultados)
+
+
+def calcular_resultados():
     resultados = {}
-
     for voto in votos:
-        candidato = voto.get_candidato().get_nombre()
-
+        candidato = voto.get_candidato.get_nombre()  # Acceder al atributo sin paréntesis
+        partido = voto.get_candidato.get_partido
         if candidato not in resultados:
-            resultados[candidato] = 0
-
-        resultados[candidato] += 1
-
-    resultados_ordenados = dict(sorted(resultados.items(), key=lambda item: item[1], reverse=True))
-
-    return render_template('verResultados.html', resultados=resultados_ordenados)
-
-        
+            resultados[candidato,partido] = 0
+        resultados[candidato,partido] += 1
+    return resultados
