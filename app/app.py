@@ -3,6 +3,8 @@ from datetime import datetime
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
+from collections import defaultdict
+
 
 class Persona:
     def __init__(self, nombre, ci):
