@@ -119,10 +119,10 @@ span{
     background: #705ab8;
 }
 .swiper-navBtn{
-    color:#ebe5ff;
+    color:#843dff;
 }
 .swiper-navBtn:hover{
-    color:#843dff;
+    color:#2b0c61;
 }
 .swiper-navBtn::before,
 .swiper-navBtn::after{

@@ -87,18 +87,34 @@ for tabla_nombre in TABLES:
             print('OK')
 
 
-# insertando usuarios
 usuario_sql = 'INSERT INTO elector (ci_elector, nombre, apellido_paterno, apellido_materno, fecha_nacimiento, estado ) VALUES (%s, %s, %s,%s, %s, %s)'
 
 usuarios = [
-      ('123', 'Armando', 'Esteban', "Quito", "10-10-10", "habilitado" )
+      ('111', 'Rick', 'Sanchez', "Smith", "09-09-09", "habilitado" ),
+      ('222', 'Alvin', 'Martinez', "Flores", "08-08-08", "habilitado" ),
+      ('333', 'Bruno', 'Diaz', "Wayne", "07-07-07", "habilitado" ),
+      ('444', 'Barry', 'Allen', "Ford", "05-05-05", "desahibilitado" ),
+      ('555', 'Ana', 'Rodriguez', "Vargas", "04-04-04", "habilitado" )
 ]
 cursor.executemany(usuario_sql, usuarios)
+
+candi = 'INSERT INTO candidato(id_candidato, nombre_partido, nombre_candidato, foto_candidato)'
+cad = [
+    ('11','INAPJA/XYZ','Jeanine Aniez','/assets/asdias.jpg'),
+    ('22','XYZ/CHI','Chi','/assetes/chi.jpg' ),
+    ('33','MAU/XZA','Maurio Monzon','/assets/mau.jpg'),
+    ('44', 'MCO/PCO','Luis Mesa','/assets/ms.jpg'),
+    ('0','none','Blanco','/assets/blanco.jpg'),
+    ('1','none','Nulo','/assets/nulo.jpg')
+]
+cursor.executemany(candi, cad)
+
+admin = 'INSERT INTO administrador(id_admin, username, contrasena)'
+ad = [
+    ('1','admin','admin')
+]
+cursor.executemany(admin, ad)
 #Cambiar por ruta
-cursor.execute('select * from MauriApaza845$sistemaEleccionesDB.elector')
-print(' -------------  Usuarios:  -------------')
-for user in cursor.fetchall():
-    print(user[1])
 
 
 # commitando si no hay nada que tenga efecto
