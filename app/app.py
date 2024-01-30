@@ -4,7 +4,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
 
-
 class Persona:
     def __init__(self, nombre, ci):
         self.__nombre = nombre.title()
@@ -58,13 +57,16 @@ class comite_electoral(Persona):
         return self.__contrasena
 
 class Voto:
-    def __init__(self, elector, voto):
+    def __init__(self, elector, candidato):
         self.__elector = elector
-        self.__voto = voto
+        self.__candidato = candidato
 
     @property
-    def voto(self):
-        return self.__voto
+    def get_elector(self):
+        return self.get_elector
+    @property
+    def get_candidato(self):
+        return self.get_candidato
 
     def emitir_voto(self):
         if self.__elector.habilitado:
@@ -85,10 +87,15 @@ elector3 = Elector('luis cuadros',24, True,'2005-01-21' )
 comite1 = comite_electoral('jose', 123456, 'password')
 comite2 = comite_electoral('pablo', 123457, 'password')
 
+voto1 = Voto('1','KML')
+voto2 = Voto('2','XYZ')
+voto3 = Voto('3','KML')
+voto4 = Voto('4','RQT')
+voto5 = Voto('5','KML')
 electores=[elector1, elector2, elector3]   # lista de electores
 comites=[comite1,comite2] # Lista de comite
 
-votos =[]  # lista de votos
+votos =[voto1,voto2,voto3,voto4,voto5]  # lista de votos
 
 app = Flask(__name__, static_url_path='/templates/Style/login.css')
 app.secret_key = 'cochabamba'
@@ -161,4 +168,13 @@ def verificar_comite():
         flash('CI y/o Contraseña incorrecta, por favor vuelve a ingresar los datos.', 'error')
 
     return render_template('loginComite.html')
+
+@app.route('/ver_resultado', methods=['GET'])
+def ver_res():
+    resultados = defaultdict(int)
+    for voto in votos:
+        candidato = voto.get_candidato
+        resultados[candidato] += 1
+
+    return render_template('ver_resultado.html', resultados=resultados)
         
