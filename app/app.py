@@ -59,16 +59,12 @@ class comite_electoral(Persona):
         return self.__contrasena
 
 class Voto:
-    def __init__(self, elector, candidato):
-        self.__elector = elector
+    def __init__(self,candidato:Candidato):
         self.__candidato = candidato
-
-    @property
-    def get_elector(self):
-        return self.get_elector
+    
     @property
     def get_candidato(self):
-        return self.get_candidato
+        return self.__candidato
 
     def emitir_voto(self):
         if self.__elector.habilitado:
@@ -89,11 +85,11 @@ elector3 = Elector('luis cuadros',24, True,'2005-01-21' )
 comite1 = comite_electoral('jose', 123456, 'password')
 comite2 = comite_electoral('pablo', 123457, 'password')
 
-voto1 = Voto('1','KML')
-voto2 = Voto('2','XYZ')
-voto3 = Voto('3','KML')
-voto4 = Voto('4','RQT')
-voto5 = Voto('5','KML')
+voto1 = Voto(candidato1)
+voto2 = Voto(candidato1)
+voto3 = Voto(candidato2)
+voto4 = Voto(candidato3)
+voto5 = Voto(candidato1)
 electores=[elector1, elector2, elector3]   # lista de electores
 comites=[comite1,comite2] # Lista de comite
 
@@ -171,12 +167,21 @@ def verificar_comite():
 
     return render_template('loginComite.html')
 
+
 @app.route('/ver_resultado', methods=['GET'])
 def ver_res():
-    resultados = defaultdict(int)
+    resultados = {}
+
     for voto in votos:
-        candidato = voto.get_candidato
+        candidato = voto.get_candidato().get_nombre()
+
+        if candidato not in resultados:
+            resultados[candidato] = 0
+
         resultados[candidato] += 1
 
-    return render_template('ver_resultado.html', resultados=resultados)
+    resultados_ordenados = dict(sorted(resultados.items(), key=lambda item: item[1], reverse=True))
+
+    return render_template('verResultados.html', resultados=resultados_ordenados)
+
         

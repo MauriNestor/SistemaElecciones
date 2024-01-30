@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estadísticas de votación</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="/Style/verResultados.css">
     <script src="./JS/corteElectoral.js"></script>
 </head>
@@ -15,54 +13,16 @@
         <h2 class="fw-bold text-center py-5 titulo">Resultados de la Votacion</h2>
     </header>
     <div class="container">
-        <div class="box-candidato">
-            <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
-            <h2>JEANYNE ANIEZ </h2>
-            <P>CDS/ASD<br>
-                   1%<br>
-                   10 votos<br>
-            </P>
-        </div>
-        <div class="box-candidato">
-            <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
-            <h2>JEANYNE ANIEZ </h2>
-            <P>CDS/ASD<br>
-                   1%<br>
-                   10 votos<br>
-            </P>
-        </div>
-        <div class="box-candidato">
-            <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
-            <h2>JEANYNE ANIEZ </h2>
-            <P>CDS/ASD<br>
-                   1%<br>
-                   10 votos<br>
-            </P>
-        </div>
-        <div class="box-candidato">
-            <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
-            <h2>JEANYNE ANIEZ </h2>
-            <P>CDS/ASD<br>
-                   1%<br>
-                   10 votos<br>
-            </P>
-        </div>
-        <div class="box-candidato">
-            <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
-            <h2>JEANYNE ANIEZ </h2>
-            <P>CDS/ASD<br>
-                   1%<br>
-                   10 votos<br>
-            </P>
-        </div>
-        <div class="box-candidato">
-            <img src="/assets/icon/aniez.jpg" alt="" class="card-img">
-            <h2>JEANYNE ANIEZ </h2>
-            <P>CDS/ASD<br>
-                   1%<br>
-                   10 votos<br>
-            </P>
-        </div>
+        {% for candidato, datos in resultados.items() %}
+            <div class="box-candidato">
+                <img src="" alt="" class="card-img">
+                <h2>{{ candidato }}</h2>
+                <p>{{ datos['partido'] }}<br>
+                   {{ datos['porcentaje'] }}%<br>
+                   {{ datos['votos'] }} votos<br>
+                </p>
+            </div>
+        {% endfor %}
     </div>
     <div class="btn-opciones">
         <a href="/loginUsuario.html" class="btn imprimir">
