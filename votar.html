@@ -3,139 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Style/swiper-bundle.min.css">
-    <link rel="stylesheet" href="Style/votar.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper-bundle.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/votar.css') }}">
     <title>Votacion</title>
 </head>
 <body>
-    <!-- <h1>AQUI SE REALIZARA EL VOTO</h1> -->
+    <form method="POST" action="/realizar_votacion">
     <div class="slide-container swiper">
         <header>
-            <h1>ELIGE A TU CANDIDATO</h1> 
+            <h1>ELIGE A TU CANDIDATO</h1>
             <span>Recuerda que solo puedes seleccionar a un candidato.</span>
         </header>
         <div class="slide-content">
             <div class="card-wrapper swiper-wrapper">
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <span class="overlay"></span>
-                            
-                            <div class="card-image">
-                                    <img src="assets/icon/aniez.jpg" alt="" class="card-img">
-                            </div>  
+                {% for elector in electores %}
+                    {% for candidato in candidatos %}
+                        <div class="card swiper-slide">
+                            <input type="hidden" name="elector_ci" value="{{ elector.get_ci() }}">
+                            <div class="image-content">
+                                <span class="overlay"></span>
+                                <div class="card-image">
+                                    <img src="{{ url_for('static', filename=candidato.imagen) }}" alt="" class="card-image" width="100">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="name">{{ candidato.get_nombre() }}</h2>
+                                <p class="description">
+                                    {{ candidato.get_partido() }}
+                                </p>
+                                <input type="radio" name="candidato_ci" value="{{ candidato.get_ci() }}">
+                            </div>
                         </div>
-
-                        <div class="card-content">
-                            <h2 class="name">Jeanine Aniez</h2>
-                            <p class="description">
-                                JA/XYZ
-                            </p>
-                            <button class="button">Votar</button>
-                        </div>
-
-
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <span class="overlay"></span>
-                            
-                            <div class="card-image">
-                                    <img src="assets/icon/chi.jpg" alt="" class="card-img">
-                            </div>  
-                        </div>
-
-                        <div class="card-content">
-                            <h2 class="name">Chi</h2>
-                            <p class="description">
-                                XYZ/CHI
-                            </p>
-                            <button class="button">Votar</button>
-                        </div>
-
-
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <span class="overlay"></span>
-                            
-                            <div class="card-image">
-                                    <img src="assets/icon/duki.jpeg" alt="" class="card-img">
-                            </div>  
-                        </div>
-
-                        <div class="card-content">
-                            <h2 class="name">Maurio Monzon<h2>
-                            <p class="description">
-                                MAU/XZA
-                            </p>
-                            <button class="button">Votar</button>
-                        </div>
-
-
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <span class="overlay"></span>
-                            
-                            <div class="card-image">
-                                    <img src="assets/icon/luisarce.webp" alt="" class="card-img">
-                            </div>  
-                        </div>
-
-                        <div class="card-content">
-                            <h2 class="name">Luis Arce Catacora</h2>
-                            <p class="description">
-                                MAS/IPSP
-                            </p>
-                            <button class="button">Votar</button>
-                        </div>
-                        
-
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <span class="overlay"></span>
-                            
-                            <div class="card-image">
-                                    <img src="assets/icon/mesa.jpg" alt="" class="card-img">
-                            </div>  
-                        </div>
-
-                        <div class="card-content">
-                            <h2 class="name">Luis Mesa</h2>
-                            <p class="description">
-                                MCO/PCO
-                            </p>
-                            <button class="button">Votar</button>
-                        </div>
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <span class="overlay"></span>
-                            
-                            <div class="card-image">
-                                    <img src="assets/icon/wos.jpg" alt="" class="card-img">
-                            </div>  
-                        </div>
-
-                        <div class="card-content">
-                            <h2 class="name">Valentin Oliva</h2>
-                            <p class="description">
-                                VAL/OL
-                            </p>
-                            <button class="button">Votar</button>
-                        </div>
-                        
-
-                    </div>
+                    {% endfor %}
+                {% endfor %}
             </div>
         </div>
-        
         <div class="swiper-button-next swiper-navBtn"></div>
         <div class="swiper-button-prev swiper-navBtn"></div>
         <div class="swiper-pagination"></div>
     </div>
+    <button class="button" type="submit">Votar</button>
+    </form>
+
 </body>
-<script src="/JS/swiper-bundle.min.js"></script>
-<script src="/JS/votar.js"></script>
+    <script src="{{ url_for('static', filename='JS/swiper-bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='JS/votar.js') }}"></script>
 </html>

@@ -1,11 +1,13 @@
+from candidato import Candidato
+
 class Voto:
-    def __init__(self, elector, voto):
-        self.__elector = elector
-        self.__voto = voto
+    def __init__(self,candidato:Candidato):
+        self.__candidato = candidato
 
     @property
-    def voto(self):
-        return self.__voto
+    def get_candidato(self):
+        return self.__candidato
+
 
     def emitir_voto(self):
         if self.__elector.habilitado:

@@ -1,5 +1,6 @@
 import mysql.connector
 from mysql.connector import errorcode
+from flask_sqlalchemy import SQLAlchemy
 
 print("Conectando...")
 try:
@@ -98,7 +99,7 @@ usuarios = [
 ]
 cursor.executemany(usuario_sql, usuarios)
 
-candi = 'INSERT INTO candidato(id_candidato, nombre_partido, nombre_candidato, foto_candidato)'
+candi = 'INSERT INTO candidato(id_candidato, nombre_partido, nombre_candidato, foto_candidato) VALUES (%s, %s, %s,%s)'
 cad = [
     ('11','INAPJA/XYZ','Jeanine Aniez','/assets/asdias.jpg'),
     ('22','XYZ/CHI','Chi','/assetes/chi.jpg' ),
@@ -109,7 +110,7 @@ cad = [
 ]
 cursor.executemany(candi, cad)
 
-admin = 'INSERT INTO administrador(id_admin, username, contrasena)'
+admin = 'INSERT INTO administrador(id_admin, username, contrasena) VALUES (%s, %s, %s)'
 ad = [
     ('1','admin','admin')
 ]

@@ -10,7 +10,7 @@ class Elector(Persona):
         self.__apellido2 = apellido2
 
     @property
-    def habilitado(self):
+    def es_habilitado(self):
         return self.__habilitado
     @property
     def fnacmiento(self):
@@ -23,7 +23,8 @@ class Elector(Persona):
     def apellidoMaterno(self):
         return self.__apellido2
 
-    @habilitado.setter
-    def habilitado(self, habilitado):
-        self.__habilitado = habilitado
+    @es_habilitado.setter
+    def es_habilitado(self, valor):
+        self.__habilitado = valor
+
 

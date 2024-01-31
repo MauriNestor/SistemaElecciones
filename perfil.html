@@ -17,16 +17,26 @@
             </div>
             <div class="col-md-12 bg-white p-5 rounded">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>Nombre Completo: </b>{{ nombre }}</li>
+                    <li class="list-group-item"><b>Nombres: </b>{{ nombre }}</li>
+                    <li class="list-group-item"><b>Apellido Paterno: </b>{{ apellidoPaterno }}</li>
+                    <li class="list-group-item"><b>Apellido Materno: </b>{{ apellidoMaterno }}</li>
                     <li class="list-group-item"><b>Carnet de Identidad: </b>{{ ci }}</li>
                     <li class="list-group-item"><b>Fecha de nacimiento: </b> {{ fechaNacimiento }}</li>
-                    <li class="list-group-item"><b>Estado de Votación: </b>{{ estado }}</li>
+                    <li class="list-group-item"><b>Estado de Votación: </b>{{ habilitado }}</li>
                     <li class="list-group-item"></li>
                 </ul>
             </div>
-            <div class="col-md-12 text-center pb-5">
-                <button class="btn btn-success btn-lg" type="button" onclick="irVotar()">Votar</button>
-            </div>
+            <form action="/irVotar" method="POST">
+                <input type="hidden" name="{{ habilitado }}" value="{{ habilitado }}">
+                <input type="hidden" name="{{ ci }}" value="{{ ci }}">
+                <div class="col-md-12 text-center pb-5">
+                    {% if habilitado == 'habilitado' %}
+                        <button class="btn btn-success btn-lg" type="submit">Votar</button>
+                    {% else %}
+                        <p class="text-danger">No estás habilitado para votar.</p>
+                    {% endif %}
+                </div>
+            </form>
         </div>
     </div>
 </body>
