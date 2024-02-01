@@ -1,0 +1,17 @@
+body {
+    background: #ffe259;
+    background: linear-gradient(to right, #843dff, #ebe5ff);
+}
+.container-data {
+    display: grid;
+    margin-top: 3rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+.container-img-logo {
+    place-self: center;
+}
+.list-group-flush {
+    border-radius: 0;
+    font-weight: 500;
+}
