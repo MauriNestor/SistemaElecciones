@@ -6,11 +6,6 @@ from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, Column, Integer, String, func
 
-# from elector import Elector
-# from candidato import Candidato
-# from comite_electoral import Comite_electoral
-# from voto import Voto
-
 app = Flask(__name__)
 app.secret_key = 'cochabamba'
 
@@ -64,17 +59,30 @@ class Comite(db.Model):
 def index():
     return render_template('loginUsuario.html')
 
-
 @app.route('/verificar', methods=['POST'])
 def verificar():
-    elector = Elector.query.filter_by(ci_elector=request.form['input-carnet']).first()
+    ci_carnet = request.form.get('input-carnet')
+    fecha_nacimiento = request.form.get('input-fn')
+
+    if not ci_carnet or not fecha_nacimiento:
+        flash('Por favor, completa ambos campos.', 'error')
+        return render_template('loginUsuario.html')
+
+    elector = Elector.query.filter_by(ci_elector=ci_carnet).first()
 
     if elector:
         pass_elec = elector.fecha_nacimiento.strftime('%Y-%m-%d')
-        if request.form['input-fn'] == pass_elec:
+        if fecha_nacimiento == pass_elec:
+            fecha_nacimiento_dt = datetime.strptime(fecha_nacimiento, '%Y-%m-%d')
+            edad = (datetime.now() - fecha_nacimiento_dt).days // 365
+            if edad < 18:
+                flash('Solo pueden votar personas mayores a 18 años.', 'error')
+                return render_template('loginUsuario.html')
+
             session['elector_logueado'] = elector.ci_elector
-            flash(elector.nombre + ' logueado con éxito!')
-            return render_template('perfil.html', nombre=elector.nombre, apellidoPaterno = elector.apellido_paterno, apellidoMaterno = elector.apellido_materno, ci=elector.ci_elector, fechaNacimiento= elector.fecha_nacimiento, habilitado= elector.estado)
+            # flash(elector.nombre + ' logueado con éxito!')
+
+            return render_template('perfil.html', elector = elector)
         else:
             flash('CI y/o fecha de nacimiento incorrecta, por favor vuelve a ingresar los datos.', 'error')
             return render_template('loginUsuario.html')
@@ -87,19 +95,31 @@ def verificar():
 def index2():
         return render_template('loginComite.html')
 
-
 @app.route('/verificar_comite', methods=['POST'])
 def verificar_comite():
-    comite = Comite.query.filter_by(ci_comite=request.form['input-ci']).first()
+    ci_comite = request.form.get('input-ci')
+    contrasena = request.form.get('input-contra')
+
+    if not ci_comite or not contrasena:
+        flash('Por favor, completa ambos campos.', 'error')
+        return render_template('loginComite.html')
+
+    comite = Comite.query.filter_by(ci_comite=ci_comite).first()
+
     if comite:
-        if request.form['input-contra'] == comite.contrasena:
+        if contrasena == comite.contrasena:
             session['comite_logueado'] = comite.ci_comite
-            flash('bienvenido')
+            flash('Bienvenido')
             candidatos = Candidato.query.all()
-            return render_template('verResultados.html',candidatos = candidatos)
+            cantidadtotal = Voto.query.count()
+            cantidadelectores = Elector.query.count()
+            return render_template('verResultados.html', candidatos=candidatos, cantidadtotal = cantidadtotal, cantidadelectores = cantidadelectores)
         else:
             flash('CI y/o contraseña incorrecta, por favor vuelve a ingresar los datos.', 'error')
             return render_template('loginComite.html')
+    else:
+        flash('CI y/o contraseña incorrecta, por favor vuelve a ingresar los datos.', 'error')
+        return render_template('loginComite.html')
 
 
 
@@ -108,8 +128,6 @@ def irVotar():
 
     candidatos = Candidato.query.all()
     return render_template('votar.html', candidatos=candidatos)
-
-
 
 
 @app.route('/realizar_votacion', methods=['POST'])
@@ -131,3 +149,5 @@ def realizar_votacion():
             flash('Por favor, selecciona un candidato antes de votar.', 'error')
             return render_template('votar.html', candidatos=candidatos)
     return render_template('votar.html', candidatos=candidatos)
+
+
