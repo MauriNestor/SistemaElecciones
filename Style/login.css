@@ -3,7 +3,7 @@ body{
     background: linear-gradient(to right, #843dff, #ebe5ff);
 }
 .bg{
-    background-image:url(../assets/icon/elecciones-Judiciales-Bolivia-2024.jpg);
+    background-image:url(../images/elecciones-Judiciales-Bolivia-2024.jpg);
     background-position: center center;
     height: 455px;
 }

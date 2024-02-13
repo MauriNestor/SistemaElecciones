@@ -1,61 +1,45 @@
-/* @import url('https: //fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap'); */
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
-body{
+
+body {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #ebe5ff;
-    
 }
-h1{
-    font-size: 50px;
-    text-align: center;
-    padding-bottom:10px;
+
+.container {
+    max-width: 1200px;
 }
-span{
-    font-size: 30px;
-}
-.slide-container{
-    max-width: 1500px;
-    height: 700px;
+
+.card {
     width: 100%;
-    padding: 40px 0;
-}
-.slide-content{
-    padding: 45px 20px;
-    margin: 0 40px;
-    /* background-color: red; */
-    overflow: hidden;
-    border-radius: 25px;
-}
-.card{
-    width: 320px;
-    height: 450px;
     border-radius: 25px;
     background-color: #FFF;
-
+    margin-bottom: 20px;
 }
-.image-content, 
-.card-content{
+
+.image-content,
+.card-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px 10px 10px 0px;
-
 }
-.image-content{
+
+.image-content {
     row-gap: 5px;
     position: relative;
     padding: 25px 0;
 }
-.overlay{
+
+.overlay {
     position: absolute;
     left: 0;
     top: 0;
@@ -64,47 +48,64 @@ span{
     background-color: #843dff;
     border-radius: 25px 25px 0 25px;
 }
+
 .overlay::before,
-.overlay::after{
+.overlay::after {
     content: '';
     position: absolute;
     right: 0;
-    bottom: -40px;
-    height: 40px;
-    width: 40px;
+    bottom: -30px;
+    height: 30px;
+    width: 30px;
     background-color: #843dff;
 }
-.overlay::after{
-    border-radius: 0 25px 0 0;
-    background-color: #FFF;
-}
-.card-image{
-    position: relative;
-    height: 200px;
-    width:200px;
-    background-color: #FFF;
-    border-radius: 50%;
-    padding: 3px;
-}
-.card-image .card-img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 4px solid #843dff;
 
+.overlay::after {
+    border-radius: 0 20px 0 0;
+    background-color: #FFF;
 }
-.name{
+
+.card-image {
+    position: relative;
+    padding: 5px;
+}
+
+.card-image .card-img {
+    object-fit: cover;
+}
+
+/* Ajuste del tamanio del boton  */
+
+input[type="radio"] {
+    width: 30px;
+    height: 30px;
+}
+
+
+form.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+button.btn.btn-primary {
+    margin-top: 20px;
+}
+/* Ajuste total centrado y tamanio del boton */
+.name {
     font-size: 18px;
     font-weight: 500;
     color: #333;
 }
-.description{
+
+.description {
     font-size: 14px;
     color: #707070;
     text-align: center;
 }
-.button{
+
+.button {
     border: none;
     font-size: 25px;
     color: #fff;
@@ -115,37 +116,35 @@ span{
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.button:hover{
+
+.button:hover {
     background: #705ab8;
 }
-.swiper-navBtn{
-    color:#843dff;
-}
-.swiper-navBtn:hover{
-    color:#2b0c61;
-}
-.swiper-navBtn::before,
-.swiper-navBtn::after{
-    font-size: 40px;
-}
-.swiper-navBtn-next{
-    right: 0;
-}
-.swiper-navBtn-prev{
-    left: 0;
-}
-.swiper-pagination-bullet{
-    background-color: #843dff;
-    opacity:1;
-}
-.swiper-pagination-bullet-active{
-    background-color: #ebe5ff;
-}
-@media screen and (max-width: 768px){
-    .slide-content{
-        margin: 0 10px;
-    }
-    .swiper-navBtn{
+
+@media screen and (max-width: 768px) {
+    .swiper-navBtn {
         display: none;
     }
 }
+/* Tamanio del Boton y color*/
+button.btn.btn-primary {
+    margin-top: 20px;
+    font-size: 30px;
+    padding: 12px 24px;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+button.btn.btn-primary:hover {
+    background-color: #218838;
+}
+
+img.card-img-top {
+    max-width: 87%;
+    height: auto;
+    border-radius: 50%;
+}
+h3{
+    color: red;
+}
+

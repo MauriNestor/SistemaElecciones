@@ -3,49 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper-bundle.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/votar.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+     <link rel="stylesheet" href="/static/css/votar.css">
     <title>Votacion</title>
 </head>
 <body>
-    <form method="POST" action="/realizar_votacion">
-    <div class="slide-container swiper">
-        <header>
-            <h1>ELIGE A TU CANDIDATO</h1>
-            <span>Recuerda que solo puedes seleccionar a un candidato.</span>
+    <form method="POST" action="/realizar_votacion" class="container mt-5">
+        <header class="mb-4">
+            <h1 class="text-center">ELIGE A TU CANDIDATO</h1>
+            <span class="text-center d-block">Recuerda que solo puedes seleccionar a un candidato.</span>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                            <h3>
+                            <ul class="flashes">
+                                {% for category, message in messages %}
+                                    <li class="{{ category }}">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            </h3>
+                    {% endif %}
+                {% endwith %}
         </header>
-        <div class="slide-content">
-            <div class="card-wrapper swiper-wrapper">
-                {% for elector in electores %}
-                    {% for candidato in candidatos %}
-                        <div class="card swiper-slide">
-                            <input type="hidden" name="elector_ci" value="{{ elector.get_ci() }}">
-                            <div class="image-content">
-                                <span class="overlay"></span>
-                                <div class="card-image">
-                                    <img src="{{ url_for('static', filename=candidato.imagen) }}" alt="" class="card-image" width="100">
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <h2 class="name">{{ candidato.get_nombre() }}</h2>
-                                <p class="description">
-                                    {{ candidato.get_partido() }}
-                                </p>
-                                <input type="radio" name="candidato_ci" value="{{ candidato.get_ci() }}">
+  <div class="row justify-content-between g-4">
+    {% for candidato in candidatos %}
+        <div class="col-lg-2 col-md-4 mb-4">
+            <div class="card">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename=candidato.foto_candidato) }}" alt="" class="card-img-top">
                             </div>
                         </div>
-                    {% endfor %}
-                {% endfor %}
-            </div>
+                        <div class="card-body">
+                            <h2 class="card-title">{{ candidato.nombre_candidato }}</h2>
+                            <p class="card-text">{{ candidato.nombre_partido }}</p>
+                            <input type="radio" name="candidato_ci" value={{ candidato.id_candidato }}>
+                            <span>Elegir</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-        <div class="swiper-button-next swiper-navBtn"></div>
-        <div class="swiper-button-prev swiper-navBtn"></div>
-        <div class="swiper-pagination"></div>
-    </div>
-    <button class="button" type="submit">Votar</button>
+        <button class="btn btn-primary" type="submit">Votar</button>
     </form>
 
-</body>
-    <script src="{{ url_for('static', filename='JS/swiper-bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='JS/votar.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script></body>
 </html>
